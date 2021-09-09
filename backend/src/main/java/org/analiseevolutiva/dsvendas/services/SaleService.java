@@ -1,7 +1,11 @@
 package org.analiseevolutiva.dsvendas.services;
 
 
+import java.util.List;
+
 import org.analiseevolutiva.dsvendas.dto.SaleDTO;
+import org.analiseevolutiva.dsvendas.dto.SaleSuccessDTO;
+import org.analiseevolutiva.dsvendas.dto.SaleSumDTO;
 import org.analiseevolutiva.dsvendas.entites.Sale;
 import org.analiseevolutiva.dsvendas.respositories.SaleRepository;
 import org.analiseevolutiva.dsvendas.respositories.SellerRepository;
@@ -26,5 +30,15 @@ public class SaleService {
 		Page<Sale> result = repository.findAll(pageable);
 		return result.map(x -> new SaleDTO(x));
 	}
+	@Transactional(readOnly = true)
+	public List<SaleSumDTO> amountGroupedBySeller() {
+		return repository.amountGroupedBySeller();
+	}
+	
+	@Transactional(readOnly = true)
+	public List<SaleSuccessDTO> successGroupedBySeller() {
+		return repository.successGroupedBySeller();
+	}
+	
 
 }
